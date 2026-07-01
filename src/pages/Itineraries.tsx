@@ -1,5 +1,6 @@
 import React from 'react';
 import { siteData } from '../config/siteData';
+import { ResponsiveImage } from '../components/ResponsiveImage';
 
 export const Itineraries: React.FC = () => {
   return (
@@ -15,12 +16,17 @@ export const Itineraries: React.FC = () => {
             <div key={itinerary.id} className="glass-panel" style={{ overflow: 'hidden' }}>
               <div style={{ position: 'relative', padding: '3rem 2rem', borderBottom: '1px solid var(--color-glass-border)' }}>
                 {itinerary.imageUrl && (
-                  <div style={{
-                    position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
-                    backgroundImage: `url(${itinerary.imageUrl})`,
-                    backgroundSize: 'cover', backgroundPosition: 'center',
-                    opacity: 0.3, zIndex: 0
-                  }} />
+                  <ResponsiveImage
+                    src={itinerary.imageUrl}
+                    alt=""
+                    sizes="(max-width: 768px) 100vw, 960px"
+                    style={{
+                      position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
+                      width: '100%', height: '100%', objectFit: 'cover',
+                      opacity: 0.3, zIndex: 0
+                    }}
+                    aria-hidden="true"
+                  />
                 )}
                 <div style={{ position: 'relative', zIndex: 1 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>

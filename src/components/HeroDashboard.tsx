@@ -1,8 +1,7 @@
 import React from 'react';
 import { FloatingWindow } from './FloatingWindow';
 import { siteData } from '../config/siteData';
-import { Link } from 'react-router-dom';
-import { MapPin, Calendar, Camera, Train, Coffee, Star, Bell } from 'lucide-react';
+import { Link } from '../routing';
 
 export const HeroDashboard: React.FC = () => {
   return (
@@ -33,7 +32,7 @@ export const HeroDashboard: React.FC = () => {
         >
           <div className="card-content" style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px', color: '#F472B6' }}>
-              <Star size={20} />
+              <span className="hero-mini-icon" aria-hidden="true" />
               <strong style={{ fontSize: '1.05rem', color: '#fff' }}>今週の人気急上昇</strong>
             </div>
             <p style={{ fontSize: '0.9rem', margin: 0, color: '#E2E8F0', lineHeight: 1.6 }}>秋の京都・嵐山エリアが注目を集めています。</p>
@@ -48,7 +47,7 @@ export const HeroDashboard: React.FC = () => {
         >
           <div className="card-content" style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', height: '100%' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px', color: '#FCD34D' }}>
-              <Camera size={20} />
+              <span className="hero-mini-icon" aria-hidden="true" />
               <strong style={{ fontSize: '1.05rem', color: '#fff', textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>秋の撮影ヒント</strong>
             </div>
             <p style={{ fontSize: '0.9rem', margin: 0, color: '#F1F5F9', textShadow: '0 1px 2px rgba(0,0,0,0.8)' }}>逆光で紅葉を透かして撮ると美しく写ります。</p>
@@ -63,7 +62,7 @@ export const HeroDashboard: React.FC = () => {
         >
           <div className="card-content" style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', height: '100%' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px', color: '#fff' }}>
-              <Calendar size={20} color="var(--color-accent-magenta)" />
+              <span className="hero-mini-icon" style={{ color: 'var(--color-accent-magenta)' }} aria-hidden="true" />
               <strong style={{ fontSize: '1.05rem', textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>週末モデルコース</strong>
             </div>
             <p style={{ fontSize: '0.9rem', margin: 0, color: '#F1F5F9', textShadow: '0 1px 2px rgba(0,0,0,0.8)' }}>京都で過ごす静かな一泊二日</p>
@@ -78,7 +77,7 @@ export const HeroDashboard: React.FC = () => {
         >
           <div className="card-content" style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', height: '100%' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px', color: '#34D399' }}>
-              <MapPin size={20} />
+              <span className="hero-mini-icon" aria-hidden="true" />
               <strong style={{ fontSize: '1.05rem', color: '#fff', textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>金沢の美食</strong>
             </div>
             <p style={{ fontSize: '0.9rem', margin: 0, color: '#F1F5F9', textShadow: '0 1px 2px rgba(0,0,0,0.8)' }}>海鮮丼と金沢おでんは冬が特におすすめ。</p>
@@ -92,7 +91,7 @@ export const HeroDashboard: React.FC = () => {
           style={{ background: 'rgba(30, 41, 59, 0.7)' }}
         >
           <div className="card-content" style={{ padding: '1.5rem', display: 'flex', alignItems: 'center', gap: '16px', height: '100%' }}>
-            <Bell size={24} color="#60A5FA" />
+            <span className="hero-mini-icon hero-mini-icon-large" style={{ color: '#60A5FA' }} aria-hidden="true" />
             <div>
               <strong style={{ display: 'block', fontSize: '1rem', color: '#fff', marginBottom: '4px' }}>新着記事</strong>
               <span style={{ fontSize: '0.9rem', color: '#94A3B8' }}>2023年の紅葉予想カレンダーを公開しました</span>
@@ -108,7 +107,7 @@ export const HeroDashboard: React.FC = () => {
         >
           <div className="card-content" style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px', color: '#34D399' }}>
-              <Train size={18} />
+              <span className="hero-mini-icon hero-mini-icon-small" aria-hidden="true" />
               <strong style={{ fontSize: '0.95rem', color: '#fff' }}>移動のヒント</strong>
             </div>
             <p style={{ fontSize: '0.85rem', margin: 0, color: '#E2E8F0' }}>地域ごとのフリーパスを活用しましょ</p>
@@ -123,7 +122,7 @@ export const HeroDashboard: React.FC = () => {
         >
           <div className="card-content" style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px', color: '#FBBF24' }}>
-              <Coffee size={18} />
+              <span className="hero-mini-icon hero-mini-icon-small" aria-hidden="true" />
               <strong style={{ fontSize: '0.95rem', color: '#fff' }}>喫茶店めぐり</strong>
             </div>
             <p style={{ fontSize: '0.85rem', margin: 0, color: '#E2E8F0' }}>小樽の歴史的建造物を改装したレトロな</p>
@@ -163,6 +162,24 @@ export const HeroDashboard: React.FC = () => {
         .hero-bottom-small {
           grid-column: span 1;
           grid-row: span 1;
+        }
+        .hero-mini-icon {
+          width: 20px;
+          height: 20px;
+          border-radius: 999px;
+          background: currentColor;
+          box-shadow: 0 0 12px currentColor;
+          display: inline-block;
+          flex: 0 0 auto;
+          opacity: 0.85;
+        }
+        .hero-mini-icon-small {
+          width: 18px;
+          height: 18px;
+        }
+        .hero-mini-icon-large {
+          width: 24px;
+          height: 24px;
         }
         
         @media (max-width: 1024px) {

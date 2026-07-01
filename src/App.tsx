@@ -1,32 +1,50 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
 import { Layout } from './components/Layout';
 import { Home } from './pages/Home';
-import { About } from './pages/About';
-import { Destinations } from './pages/Destinations';
-import { Itineraries } from './pages/Itineraries';
-import { Seasonal } from './pages/Seasonal';
-import { Contact } from './pages/Contact';
-import { PrivacyPolicy } from './pages/PrivacyPolicy';
-import { Terms } from './pages/Terms';
 import ScrollToTop from './components/ScrollToTop';
+import { RouterProvider, useLocation } from './routing';
+
+const About = lazy(() => import('./pages/About').then((module) => ({ default: module.About })));
+const Destinations = lazy(() => import('./pages/Destinations').then((module) => ({ default: module.Destinations })));
+const Itineraries = lazy(() => import('./pages/Itineraries').then((module) => ({ default: module.Itineraries })));
+const Seasonal = lazy(() => import('./pages/Seasonal').then((module) => ({ default: module.Seasonal })));
+const Contact = lazy(() => import('./pages/Contact').then((module) => ({ default: module.Contact })));
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy').then((module) => ({ default: module.PrivacyPolicy })));
+const Terms = lazy(() => import('./pages/Terms').then((module) => ({ default: module.Terms })));
+
+const CurrentPage = () => {
+  const { pathname } = useLocation();
+
+  switch (pathname) {
+    case '/about':
+      return <About />;
+    case '/destinations':
+      return <Destinations />;
+    case '/itineraries':
+      return <Itineraries />;
+    case '/seasonal':
+      return <Seasonal />;
+    case '/contact':
+      return <Contact />;
+    case '/privacy-policy':
+      return <PrivacyPolicy />;
+    case '/terms':
+      return <Terms />;
+    default:
+      return <Home />;
+  }
+};
 
 function App() {
   return (
-    <BrowserRouter>
+    <RouterProvider>
       <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="about" element={<About />} />
-          <Route path="destinations" element={<Destinations />} />
-          <Route path="itineraries" element={<Itineraries />} />
-          <Route path="seasonal" element={<Seasonal />} />
-          <Route path="contact" element={<Contact />} />
-          <Route path="privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="terms" element={<Terms />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+      <Suspense fallback={<div className="route-fallback" aria-hidden="true" />}>
+        <Layout>
+          <CurrentPage />
+        </Layout>
+      </Suspense>
+    </RouterProvider>
   );
 }
 

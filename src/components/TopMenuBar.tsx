@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { siteData } from '../config/siteData';
-import { Wifi, Battery, Search } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link } from '../routing';
 
 export const TopMenuBar: React.FC = () => {
   const [time, setTime] = useState<string>('');
@@ -12,7 +11,7 @@ export const TopMenuBar: React.FC = () => {
       setTime(now.toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' }));
     };
     updateClock();
-    const interval = setInterval(updateClock, 1000);
+    const interval = setInterval(updateClock, 60000);
     return () => clearInterval(interval);
   }, []);
 
@@ -30,9 +29,9 @@ export const TopMenuBar: React.FC = () => {
       </div>
       
       <div className="menu-right">
-        <div className="menu-icon"><Search size={14} /></div>
-        <div className="menu-icon desktop-only"><Wifi size={14} /></div>
-        <div className="menu-icon desktop-only"><Battery size={14} /></div>
+        <div className="menu-icon"><span className="menu-icon-shape" aria-hidden="true" /></div>
+        <div className="menu-icon desktop-only"><span className="menu-icon-shape menu-icon-wifi" aria-hidden="true" /></div>
+        <div className="menu-icon desktop-only"><span className="menu-icon-shape menu-icon-battery" aria-hidden="true" /></div>
         <div className="time">{time}</div>
       </div>
 
@@ -53,7 +52,8 @@ export const TopMenuBar: React.FC = () => {
           border-left: none;
           border-right: none;
           background: rgba(10, 1, 24, 0.7);
-          backdrop-filter: blur(20px);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
           font-size: 0.8rem;
           color: var(--color-text-main);
         }
@@ -100,6 +100,28 @@ export const TopMenuBar: React.FC = () => {
           align-items: center;
         }
 
+        .menu-icon-shape {
+          width: 14px;
+          height: 14px;
+          border: 1.5px solid currentColor;
+          border-radius: 999px;
+          display: inline-block;
+          opacity: 0.85;
+        }
+
+        .menu-icon-wifi {
+          height: 9px;
+          border-bottom: none;
+          border-radius: 999px 999px 2px 2px;
+          transform: translateY(2px);
+        }
+
+        .menu-icon-battery {
+          width: 16px;
+          height: 9px;
+          border-radius: 2px;
+        }
+
         .time {
           font-weight: 500;
           letter-spacing: 0.5px;
@@ -111,6 +133,8 @@ export const TopMenuBar: React.FC = () => {
           }
           .top-menu-bar {
             padding: 0 12px;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
           }
         }
       `}</style>

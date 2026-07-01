@@ -1,6 +1,7 @@
 import React from 'react';
 import { siteData } from '../config/siteData';
 import { FloatingWindow } from '../components/FloatingWindow';
+import { ResponsiveImage } from '../components/ResponsiveImage';
 
 export const Destinations: React.FC = () => {
   return (
@@ -16,7 +17,12 @@ export const Destinations: React.FC = () => {
             <FloatingWindow key={dest.id} title={dest.region}>
               {dest.imageUrl && (
                 <div style={{ height: '200px', overflow: 'hidden' }}>
-                  <img src={dest.imageUrl} alt={dest.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  <ResponsiveImage
+                    src={dest.imageUrl}
+                    alt={dest.name}
+                    sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  />
                 </div>
               )}
               <div className="card-content">

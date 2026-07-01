@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&display=swap');
-
 :root {
   /* Dark/Purple Theme Palette */
   --color-bg-deep: #0A0118;
@@ -39,13 +37,21 @@
 }
 
 body {
-  font-family: 'Inter', 'Noto Sans JP', sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
   background-color: var(--color-bg-deep);
   color: var(--color-text-main);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   padding-bottom: calc(var(--nav-height) + 40px); /* Space for dock */
   overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+}
+
+.route-fallback {
+  min-height: 50vh;
 }
 
 /* Background Texture for Dark Theme */
@@ -79,8 +85,8 @@ body {
 /* Glassmorphism Utilities */
 .glass-panel {
   background: var(--color-glass-bg);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid var(--color-glass-border);
   box-shadow: var(--shadow-md);
   border-radius: var(--radius-md);
@@ -121,6 +127,8 @@ a:hover {
 
 .section-padding {
   padding: 5rem 0;
+  content-visibility: auto;
+  contain-intrinsic-size: 720px;
 }
 
 /* Dashboard Hero */
@@ -142,16 +150,31 @@ a:hover {
   border: 1px solid var(--color-glass-border);
   overflow: hidden;
   transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease, border-color 0.4s ease;
-  will-change: transform;
   position: relative;
   z-index: 1;
 }
 
-.floating-window:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: var(--shadow-glow);
-  border-color: var(--color-glass-border-highlight);
-  z-index: 20 !important;
+.floating-window-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.floating-window-bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.4;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .floating-window:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--shadow-glow);
+    border-color: var(--color-glass-border-highlight);
+    z-index: 20 !important;
+  }
 }
 
 .window-header {
@@ -197,10 +220,12 @@ a:hover {
   border: 1px solid var(--color-glass-border);
   transition: all 0.3s ease;
 }
-.bento-item:hover {
-  border-color: var(--color-glass-border-highlight);
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-glow);
+@media (hover: hover) and (pointer: fine) {
+  .bento-item:hover {
+    border-color: var(--color-glass-border-highlight);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-glow);
+  }
 }
 .bento-large { grid-column: span 2; grid-row: span 2; }
 .bento-wide { grid-column: span 2; grid-row: span 1; }
@@ -214,8 +239,10 @@ a:hover {
   z-index: 0;
   transition: transform 0.5s ease;
 }
-.bento-item:hover .image-bg {
-  transform: scale(1.05);
+@media (hover: hover) and (pointer: fine) {
+  .bento-item:hover .image-bg {
+    transform: scale(1.05);
+  }
 }
 .bento-content {
   position: absolute;
@@ -377,4 +404,43 @@ textarea.form-control {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+@media (max-width: 768px) {
+  .glass-panel,
+  .btn-secondary,
+  .tag {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .bg-map-texture::before {
+    background-size: 80px 80px;
+  }
+
+  .bg-map-texture::after {
+    display: none;
+  }
+
+  .floating-window,
+  .bento-item,
+  .image-bg {
+    transition-duration: 0.18s;
+  }
+
+  .section-padding {
+    padding: 3.5rem 0;
+    contain-intrinsic-size: 600px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
 }

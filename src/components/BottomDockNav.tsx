@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink } from '../routing';
 import { siteData } from '../config/siteData';
 import { Home, Map, Navigation, Sun, Mail } from 'lucide-react';
 
@@ -130,7 +130,8 @@ export const BottomDockNav: React.FC = () => {
             border: none;
             border-top: 1px solid var(--color-glass-border);
             background: rgba(10, 1, 24, 0.95);
-            backdrop-filter: blur(20px);
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
           }
           .dock-item {
             width: auto;
@@ -153,6 +154,8 @@ export const BottomDockNav: React.FC = () => {
             padding: 0;
             transform: none;
             font-size: 0.65rem;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
           }
           .dock-item.active {
             color: var(--color-accent-purple);

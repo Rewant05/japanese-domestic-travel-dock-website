@@ -1,19 +1,39 @@
-import React from 'react';
-import { Outlet } from 'react-router-dom';
-import { BottomDockNav } from './BottomDockNav';
-import { Footer } from './Footer';
-
+import React, { lazy, Suspense, useEffect, useState } from 'react';
 import { TopMenuBar } from './TopMenuBar';
 
-export const Layout: React.FC = () => {
+const BottomDockNav = lazy(() => import('./BottomDockNav').then((module) => ({ default: module.BottomDockNav })));
+const Footer = lazy(() => import('./Footer').then((module) => ({ default: module.Footer })));
+
+export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [showDeferredChrome, setShowDeferredChrome] = useState(false);
+
+  useEffect(() => {
+    let timeoutId: number | undefined;
+    const frameId = window.requestAnimationFrame(() => {
+      timeoutId = window.setTimeout(() => setShowDeferredChrome(true), 0);
+    });
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+
+      if (timeoutId !== undefined) {
+        window.clearTimeout(timeoutId);
+      }
+    };
+  }, []);
+
   return (
     <>
       <TopMenuBar />
       <main style={{ paddingTop: '36px' }}>
-        <Outlet />
+        {children}
       </main>
-      <Footer />
-      <BottomDockNav />
+      {showDeferredChrome && (
+        <Suspense fallback={null}>
+          <Footer />
+          <BottomDockNav />
+        </Suspense>
+      )}
     </>
   );
 };

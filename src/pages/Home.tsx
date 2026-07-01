@@ -2,8 +2,8 @@ import React from 'react';
 import { HeroDashboard } from '../components/HeroDashboard';
 
 import { siteData } from '../config/siteData';
-import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import { Link } from '../routing';
+import { ResponsiveImage } from '../components/ResponsiveImage';
 
 export const Home: React.FC = () => {
   return (
@@ -17,7 +17,7 @@ export const Home: React.FC = () => {
             <p style={{ margin: 0 }}>今週末に行きたい、おすすめのエリア</p>
           </div>
           <Link to="/destinations" style={{ fontWeight: 500, color: 'var(--color-accent-purple)', display: 'flex', alignItems: 'center', gap: '4px' }}>
-            すべて見る <ArrowRight size={16} />
+            すべて見る <span aria-hidden="true">&gt;</span>
           </Link>
         </div>
         
@@ -29,9 +29,16 @@ export const Home: React.FC = () => {
             
             return (
               <Link to="/destinations" key={dest.id} className={`bento-item ${bentoClass}`}>
-                {dest.imageUrl && <img src={dest.imageUrl} alt={dest.name} className="image-bg" />}
+                {dest.imageUrl && (
+                  <ResponsiveImage
+                    src={dest.imageUrl}
+                    alt={dest.name}
+                    className="image-bg"
+                    sizes={index === 0 ? '(max-width: 900px) 100vw, 50vw' : '(max-width: 900px) 100vw, 25vw'}
+                  />
+                )}
                 <div className="bento-content">
-                  <span className="tag" style={{ backdropFilter: 'blur(10px)', background: 'rgba(0,0,0,0.5)', borderColor: 'rgba(255,255,255,0.2)', color: '#fff' }}>
+                  <span className="tag" style={{ background: 'rgba(0,0,0,0.5)', borderColor: 'rgba(255,255,255,0.2)', color: '#fff' }}>
                     {dest.bestSeason}におすすめ
                   </span>
                   <h3 style={{ color: '#fff', fontSize: index === 0 ? '2rem' : '1.25rem', marginBottom: '0.5rem', textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>{dest.name}</h3>
@@ -54,7 +61,7 @@ export const Home: React.FC = () => {
             <p style={{ margin: 0 }}>編集部が厳選した、失敗しない旅程</p>
           </div>
           <Link to="/itineraries" style={{ fontWeight: 500, color: 'var(--color-accent-purple)', display: 'flex', alignItems: 'center', gap: '4px' }}>
-            すべて見る <ArrowRight size={16} />
+            すべて見る <span aria-hidden="true">&gt;</span>
           </Link>
         </div>
 
@@ -62,7 +69,12 @@ export const Home: React.FC = () => {
           {siteData.itineraries.map((itinerary) => (
             <Link to="/itineraries" key={itinerary.id} className="scroll-item floating-window" style={{ display: 'block', borderRadius: 'var(--radius-lg)' }}>
               <div style={{ height: '200px', overflow: 'hidden', position: 'relative' }}>
-                <img src={itinerary.imageUrl} alt={itinerary.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                <ResponsiveImage
+                  src={itinerary.imageUrl}
+                  alt={itinerary.title}
+                  sizes="350px"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
                 <div style={{ position: 'absolute', top: '16px', left: '16px' }}>
                   <span className="tag" style={{ background: 'rgba(0,0,0,0.6)', color: '#fff', border: 'none' }}>{itinerary.duration}</span>
                 </div>
@@ -90,7 +102,12 @@ export const Home: React.FC = () => {
               {siteData.seasons.slice(0, 2).map((season) => (
                 <div key={season.id} className="floating-window" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' }}>
                   <div style={{ position: 'relative', height: '160px', overflow: 'hidden' }}>
-                    <img src={season.imageUrl} alt={season.name} style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.8 }} />
+                    <ResponsiveImage
+                      src={season.imageUrl}
+                      alt={season.name}
+                      sizes="(max-width: 600px) 100vw, 50vw"
+                      style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.8 }}
+                    />
                     <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '1.5rem', background: 'linear-gradient(to top, rgba(0,0,0,0.8), transparent)' }}>
                       <h3 style={{ margin: 0, color: '#fff' }}>{season.name}</h3>
                     </div>

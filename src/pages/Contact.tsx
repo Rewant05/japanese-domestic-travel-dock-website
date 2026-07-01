@@ -1,6 +1,6 @@
 import React from 'react';
 import { siteData } from '../config/siteData';
-import { Link } from 'react-router-dom';
+import { Link } from '../routing';
 
 export const Contact: React.FC = () => {
   return (
