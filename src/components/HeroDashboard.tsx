@@ -11,7 +11,7 @@ export const HeroDashboard: React.FC = () => {
         {/* Main Center Window (2x2) */}
         <FloatingWindow 
           title="Overview" 
-          className="animate-fade-up hero-main-widget"
+          className="hero-main-widget"
           style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}
         >
           <div className="card-content" style={{ textAlign: 'center', padding: '3rem 2rem' }}>
@@ -128,7 +128,6 @@ export const HeroDashboard: React.FC = () => {
             <p style={{ fontSize: '0.85rem', margin: 0, color: '#E2E8F0' }}>小樽の歴史的建造物を改装したレトロな</p>
           </div>
         </FloatingWindow>
-
       </div>
 
       <style>{`

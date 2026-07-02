@@ -415,7 +415,7 @@ textarea.form-control {
   }
 
   .bg-map-texture::before {
-    background-size: 80px 80px;
+    display: none;
   }
 
   .bg-map-texture::after {
@@ -425,12 +425,64 @@ textarea.form-control {
   .floating-window,
   .bento-item,
   .image-bg {
-    transition-duration: 0.18s;
+    transition: none;
   }
 
   .section-padding {
     padding: 3.5rem 0;
     contain-intrinsic-size: 600px;
+  }
+
+  .dashboard-hero {
+    min-height: auto;
+    align-items: flex-start;
+    padding: 64px 1rem 24px;
+  }
+
+  .hero-main-widget {
+    animation: none;
+    transform: none;
+    box-shadow: none;
+    border-radius: var(--radius-md);
+  }
+
+  .hero-main-widget .window-header {
+    display: none;
+  }
+
+  .hero-main-widget .card-content {
+    padding: 2rem 1.25rem !important;
+  }
+
+  .hero-main-widget h1 {
+    font-size: 2rem !important;
+  }
+
+  .gradient-text {
+    background: none;
+    color: var(--color-text-main);
+    -webkit-text-fill-color: var(--color-text-main);
+  }
+
+  .animate-fade-up {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .btn,
+  a {
+    transition: none;
+  }
+
+  .btn-primary {
+    background: var(--color-accent-purple);
+    box-shadow: none;
+  }
+
+  .floating-window,
+  .glass-panel {
+    box-shadow: none;
   }
 }
 

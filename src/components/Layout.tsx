@@ -8,18 +8,8 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
   const [showDeferredChrome, setShowDeferredChrome] = useState(false);
 
   useEffect(() => {
-    let timeoutId: number | undefined;
-    const frameId = window.requestAnimationFrame(() => {
-      timeoutId = window.setTimeout(() => setShowDeferredChrome(true), 0);
-    });
-
-    return () => {
-      window.cancelAnimationFrame(frameId);
-
-      if (timeoutId !== undefined) {
-        window.clearTimeout(timeoutId);
-      }
-    };
+    const frameId = window.requestAnimationFrame(() => setShowDeferredChrome(true));
+    return () => window.cancelAnimationFrame(frameId);
   }, []);
 
   return (

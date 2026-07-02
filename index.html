@@ -5,8 +5,115 @@
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🪟</text></svg>" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>旅窓 - Tabi Mado | 日本の旅を、ひとつの窓から。</title>
+    <style>
+      :root {
+        --lcp-bg: #0a0118;
+        --lcp-panel: #130b24;
+        --lcp-border: rgba(139, 92, 246, 0.24);
+        --lcp-text: #f8fafc;
+        --lcp-muted: #cbd5e1;
+        --lcp-accent: #8b5cf6;
+      }
+      body {
+        margin: 0;
+        background: var(--lcp-bg);
+        color: var(--lcp-text);
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
+      }
+      .lcp-shell {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 80px 20px 40px;
+        box-sizing: border-box;
+        background: var(--lcp-bg);
+      }
+      .lcp-card {
+        width: min(100%, 620px);
+        background: var(--lcp-panel);
+        border: 1px solid var(--lcp-border);
+        border-radius: 24px;
+        box-sizing: border-box;
+        overflow: hidden;
+      }
+      .lcp-window-bar {
+        height: 36px;
+        background: #1a1033;
+        border-bottom: 1px solid var(--lcp-border);
+      }
+      .lcp-content {
+        padding: 48px 32px;
+        text-align: center;
+      }
+      .lcp-content h1 {
+        margin: 0 0 24px;
+        font-size: clamp(2rem, 6vw, 2.8rem);
+        line-height: 1.2;
+        color: var(--lcp-text);
+      }
+      .lcp-content p {
+        margin: 0 auto 32px;
+        max-width: 560px;
+        color: var(--lcp-muted);
+        font-size: 1.05rem;
+        line-height: 1.7;
+      }
+      .lcp-actions {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+      .lcp-button {
+        display: inline-block;
+        padding: 12px 24px;
+        border-radius: 999px;
+        background: var(--lcp-accent);
+        color: #fff;
+        font-weight: 700;
+        text-decoration: none;
+      }
+      .lcp-button.secondary {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid var(--lcp-border);
+      }
+      @media (max-width: 768px) {
+        .lcp-shell {
+          padding: 64px 16px 24px;
+          place-items: start center;
+        }
+        .lcp-card {
+          border-radius: 16px;
+        }
+        .lcp-window-bar {
+          display: none;
+        }
+        .lcp-content {
+          padding: 32px 20px;
+        }
+        .lcp-content h1 {
+          font-size: 2rem;
+        }
+      }
+    </style>
   </head>
   <body>
+    <div id="lcp-shell" class="lcp-shell" aria-hidden="true">
+      <section class="lcp-card">
+        <div class="lcp-window-bar"></div>
+        <div class="lcp-content">
+          <h1>日本の旅を、ひとつの窓から。</h1>
+          <p>旅窓は、日本各地の週末旅、季節の見どころ、モデルコース、地域の食文化をわかりやすくまとめる国内旅行ガイドです。</p>
+          <div class="lcp-actions">
+            <span class="lcp-button">旅先を探す</span>
+            <span class="lcp-button secondary">モデルコースを見る</span>
+          </div>
+        </div>
+      </section>
+    </div>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
